@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KursusController;
@@ -32,12 +33,10 @@ Route::get('/sesi/logout',[UserController::class, 'logout']);
 Route::get('/sesi/register',[UserController::class, 'register']);
 Route::post('/sesi/create',[UserController::class, 'create']);
 //kursus in out
-Route::post('/join/{kursusId}', [UserController::class, 'joinKursus'])->name('join.kursus');
-Route::get('/kursus/{kursusId}/users', [UserController::class, 'showKursusUsers'])->name('showKursusUsers');
+Route::post('/join/{kursusId}', [UserController::class, 'joinKursus'])->name('join.kursus')->middleware('auth');
+Route::get('/kursus/{kursusId}/users', [UserController::class, 'showKursusUsers'])->name('showKursusUsers')->middleware('auth');
 Route::post('/kursus/{kursus}/exitkursus', [UserController::class, 'exitkursus'])->name('exit.kursus');
 
-// Route::middleware(['auth', 'admin'])->group(function () {
-//     // Rute-rute untuk admin di sini
-//     Route::get('/admin/dashboard',[UserController::class,'dashboard'] )->name('admin.dashboard');
-// });
 
+// Route::resource('dashboard/kursus',AdminController::class)->except('show')->middleware('admin');
+Route::resource('dashboard/kursus',AdminController::class)->except('show'); 

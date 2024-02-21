@@ -48,7 +48,7 @@
                     </li>
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin')): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/tambahdata">Add List Course </a>
+                            <a class="nav-link" href="/dashboard/kursus">manage List Course </a>
                         </li>
                     <?php endif; ?>
 

@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Session;
 class UserController extends Controller
 {
     //
+    public function index()
+    {
+        return view("sesi/index");
+    }
     public function dashboard()
     {
     if (auth()->user()->role === 'admin') {

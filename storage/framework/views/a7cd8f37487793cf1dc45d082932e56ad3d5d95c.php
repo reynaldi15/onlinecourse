@@ -90,28 +90,15 @@
                                     <div class="col d-flex justify-content-center">
                                         <a href="<?php echo e(url("/kursus/{$kursus->id}/users")); ?>" class="btn btn-secondary">View User</a>
                                     </div>
-                                    <div class="col d-flex justify-content-center">
+                                    <div class="col d-flex justify-content-center"> 
                                         <form method="POST" action="<?php echo e(route('join.kursus', ['kursusId' => $kursus->id])); ?>">
                                             <?php echo csrf_field(); ?>
-                                            
-                                            <button type="submit" class="btn btn-success">Join</button>
+                                            <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($user->role ==='admin'): ?>
+                                                    <button type="submit" class="btn btn-success">Join</button>
+                                                <?php endif; ?>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </form>
-                                    </div>
-                                    <div class="col d-flex justify-content-center">
-                                        
-                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin')): ?>
-                                        <a href="<?php echo e(route('kelas.edit', ['kursus' => $kursus->id])); ?>">Edit Class</a>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="col d-flex justify-content-center">
-                                        
-                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin')): ?>
-                                        <form action="<?php echo e(route('kursus.destroy', ['kursus' => $kursus->id])); ?>" method="POST">
-                                            <?php echo csrf_field(); ?>
-                                            <?php echo method_field('DELETE'); ?>
-                                            <button type="submit">Delete Class</button>
-                                        </form>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 

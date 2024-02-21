@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,7 +17,9 @@ class CategoryController extends Controller
     {
         //
         $categories=Category::all();
-        return view('course',compact('categories'));
+        $users=User::all();
+        //  return view('category.index',compact(['categories','user']));
+        return view('course',compact('categories','users'));
     }
 
     /**

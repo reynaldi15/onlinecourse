@@ -89,28 +89,15 @@
                                     <div class="col d-flex justify-content-center">
                                         <a href="{{ url("/kursus/{$kursus->id}/users") }}" class="btn btn-secondary">View User</a>
                                     </div>
-                                    <div class="col d-flex justify-content-center">
+                                    <div class="col d-flex justify-content-center"> 
                                         <form method="POST" action="{{ route('join.kursus', ['kursusId' => $kursus->id]) }}">
                                             @csrf
-                                            {{-- <button type="submit" class="btn btn-sm btn-primary">Join</button> --}}
-                                            <button type="submit" class="btn btn-success">Join</button>
+                                            @foreach ($users as $user)
+                                                @if ($user->role ==='admin')
+                                                    <button type="submit" class="btn btn-success">Join</button>
+                                                @endif
+                                            @endforeach
                                         </form>
-                                    </div>
-                                    <div class="col d-flex justify-content-center">
-                                        {{-- <a href="{{ url("/kursus/{$kursus->id}/users") }}" class="btn btn-secondary">View User</a> --}}
-                                        @can('admin')
-                                        <a href="{{ route('kelas.edit', ['kursus' => $kursus->id]) }}">Edit Class</a>
-                                        @endcan
-                                    </div>
-                                    <div class="col d-flex justify-content-center">
-                                        {{-- <a href="{{ url("/kursus/{$kursus->id}/users") }}" class="btn btn-secondary">View User</a> --}}
-                                        @can('admin')
-                                        <form action="{{ route('kursus.destroy', ['kursus' => $kursus->id]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit">Delete Class</button>
-                                        </form>
-                                        @endcan
                                     </div>
                                 </div>
                                 {{-- <a href="#" class="btn btn-primary">join</a> --}}
